@@ -21,5 +21,6 @@ namespace Crtz.ProductsContext.Core
         {
             return string.Format(" ID:{0}; Description:{1}", this.Id, this.Description);
         }
+
     }
 }
