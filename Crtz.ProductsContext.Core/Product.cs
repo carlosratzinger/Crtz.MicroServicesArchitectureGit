@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Crtz.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Crtz.ProductsContext.Core
 {
-    public class Product
+    public class Product : IProduct
     {
-        public int Id { get; private set; }
-        public double Price { get; private set; }
-        public string Description { get; private set; }
+        public int Id { get; set; }
+        public double Price { get; set; }
+        public string Description { get; set; }
 
         public Product(int id, double price, string description)
         {

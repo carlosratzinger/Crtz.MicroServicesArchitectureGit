@@ -14,4 +14,10 @@
     <ProjectReference Include="..\Crtz.BasicContext.Infra\Crtz.BasicContext.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Handlers\" />
+  </ItemGroup>
+
 </Project>
