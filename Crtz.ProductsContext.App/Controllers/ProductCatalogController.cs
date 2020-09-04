@@ -1,9 +1,10 @@
-﻿using Crtz.Messages.Events;
-using Crtz.ProductsContext.Core;
-using Crtz.ProductsContext.Infra.Storage.InMemory;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using NServiceBus;
-using System;
+using Crtz.ProductsContext.Core;
+using Crtz.ProductsContext.Infra.Storage.EF;
 
 namespace Crtz.ProductsContext.App.Controllers
 {
@@ -11,17 +12,24 @@ namespace Crtz.ProductsContext.App.Controllers
     [ApiController]
     public class ProductCatalogController : ControllerBase
     {
-        private ProductCatalogStorage storage;
+        private EntityFrameworkContext ctx;
 
         public ProductCatalogController()
         {
-            storage = new ProductCatalogStorage();
+            
         }
 
         [HttpGet, Route("")]
         public IActionResult GetAllProducts()
         {
-            return Ok(storage.GetProducts());
+            List<Product> products;
+
+            using (ctx = new EntityFrameworkContext())
+            {
+                products = ctx.Products.ToList();
+            }
+
+            return Ok(products);
         }
 
         [HttpPost, Route("")]

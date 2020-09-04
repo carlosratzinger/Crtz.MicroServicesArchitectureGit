@@ -52,18 +52,22 @@ namespace Crtz.TriggerConsole
                     switch (typedKey.Key)
                     {
                         case ConsoleKey.N:
-                            Console.WriteLine();
-                            Console.WriteLine("Publishing a new product event");
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Publishing a new product event");
 
-                            endpointInstance.Publish(new NewProductEvent("New Product", Guid.NewGuid().ToString()))
-                                .ConfigureAwait(false);
+                                endpointInstance.Publish(new NewProductEvent("New Product", "New Description", DateTime.Now.Millisecond))
+                                    .ConfigureAwait(false);
 
-                            continue;
+                                continue;
+                            }
 
                         case ConsoleKey.Q:
-                            Console.WriteLine();
-                            cancellationToken.Cancel();
-                            break;
+                            {
+                                Console.WriteLine();
+                                cancellationToken.Cancel();
+                                break;
+                            }
                     }
                 }
                 catch (Exception ex)

@@ -25,15 +25,16 @@ namespace Crtz.ProductsContext.App
                     webBuilder.UseStartup<Startup>();
                 });
 
-        //      .UseNServiceBus(context =>
-        //        {
-        //    EndpointConfiguration endpointCfg = new EndpointConfiguration("WebAPI_Entpoint");
-        //    endpointCfg.UseSerialization<NewtonsoftSerializer>();
-        //    endpointCfg.UseTransport<LearningTransport>().StorageDirectory("~/App_Data");
+        #region NServiceBus configuration to use in WebAPI
 
-        //    //endpointCfg.
+        // .UseNServiceBus(context =>
+        // {
+        //     EndpointConfiguration endpointCfg = new EndpointConfiguration("WebAPI_Entpoint");
+        //     endpointCfg.UseSerialization<NewtonsoftSerializer>();
+        //     endpointCfg.UseTransport<LearningTransport>().StorageDirectory("~/App_Data");
+        //     return endpointCfg;
+        // });
 
-        //    return endpointCfg;
-        //})
+        #endregion
     }
 }

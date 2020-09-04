@@ -6,31 +6,21 @@ using System.Text;
 
 namespace Crtz.ProductsContext.Core
 {
-    public class ProductsCatalog : IProductsCatalog
+    public class ProductsCatalog
     {
-        private List<IProduct> products = new List<IProduct>();
+        private List<Product> products = new List<Product>();
 
-        public ProductsCatalog()
+        public void AddNewProduct(Product product)
         {
-            IProduct product1 = new Product(1, 100, nameof(product1));
-            IProduct product2 = new Product(2, 100, nameof(product2));
-            IProduct product3 = new Product(3, 100, nameof(product3));
-            IProduct product4 = new Product(4, 100, nameof(product4));
-            IProduct product5 = new Product(5, 100, nameof(product5));
-
-            products.Add(product1);
-            products.Add(product2);
-            products.Add(product3);
-            products.Add(product4);
-            products.Add(product5);
+            products.Add(product);
         }
 
-        public List<IProduct> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             return products;
         }
 
-        public IProduct GetProduct(int id)
+        public Product GetProduct(int id)
         {
             return products.First(p => p.Id == id);
         }

@@ -9,16 +9,18 @@ namespace Crtz.Messages.Events
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
+        public double Price { get; private set; }
 
-        public NewProductEvent(string name, string description)
+        public NewProductEvent(string name, string description, double price)
         {
             this.Name = name;
             this.Description = description;
+            this.Price = price;
         }
 
         public override string ToString()
         {
-            return $"Name: {this.Name}; Description: {this.Description}";
+            return $"Name: {this.Name}; Description: {this.Description}; Price: {this.Price}";
         }
     }
 }
