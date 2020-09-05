@@ -14,17 +14,7 @@ namespace Crtz.ProductsContext.Infra.Storage.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            //Configuration configuration = new Configuration();
-            //Configuration configuration;
-
-            //configuration.GetSection("ConnectionStrings")
-
-
-
-
             options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=PRODUCTS_DB;Trusted_Connection=True;");
-            //options.UseSqlServer();
-            //options.UseSqlServer(Microsoft.Extensions.Configuration.ConnectionStrings["MainConnection"].ToString());
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

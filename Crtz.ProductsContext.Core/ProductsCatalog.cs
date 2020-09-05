@@ -8,21 +8,26 @@ namespace Crtz.ProductsContext.Core
 {
     public class ProductsCatalog
     {
-        private List<Product> products = new List<Product>();
+        private IProductStorage productStorage;        
+
+        public ProductsCatalog(IProductStorage productStorage)
+        {
+            this.productStorage = productStorage;            
+        }
 
         public void AddNewProduct(Product product)
         {
-            products.Add(product);
+            productStorage.Add(product);
         }
 
         public List<Product> GetAllProducts()
         {
-            return products;
+            return productStorage.GetAllProducts();
         }
 
         public Product GetProduct(int id)
         {
-            return products.First(p => p.Id == id);
+            return productStorage.GetById(id);
         }
     }
 }

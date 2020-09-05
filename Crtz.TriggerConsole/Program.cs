@@ -75,8 +75,8 @@ namespace Crtz.TriggerConsole
                     {
                         case "A":
                             {
-                                NewProductEvent evnt = new NewProductEvent("Default Product", "Default Description", DateTime.Now.Millisecond);
-                                LOG.Info($"\n\n Publishing a {nameof(NewProductEvent)}: {evnt} \n");
+                                NewProductSimpleEvent evnt = new NewProductSimpleEvent("Default Product", "Default Description", DateTime.Now.Millisecond);
+                                LOG.Info($"\n\n Publishing a {nameof(NewProductSimpleEvent)}: {evnt} \n");
 
                                 endpointInstance.Publish(evnt).ConfigureAwait(false);
                                 continue;

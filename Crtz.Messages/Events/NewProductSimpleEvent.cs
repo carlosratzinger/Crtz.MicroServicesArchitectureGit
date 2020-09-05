@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Crtz.Messages.Events
 {
-    public class NewProductEvent : IEvent
+    public class NewProductSimpleEvent : IEvent
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
         public double Price { get; private set; }
 
-        public NewProductEvent(string name, string description, double price)
+        public NewProductSimpleEvent(string name, string description, double price)
         {
             this.Name = name;
             this.Description = description;

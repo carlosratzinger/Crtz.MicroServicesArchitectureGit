@@ -8,11 +8,11 @@ using NServiceBus.Logging;
 
 namespace Crtz.TriggerConsole.Receiver
 {
-    public class NewProductHandler : IHandleMessages<NewProductEvent>
+    public class NewProductHandler : IHandleMessages<NewProductSimpleEvent>
     {
         static ILog LOG = LogManager.GetLogger<NewProductHandler>();
 
-        public Task Handle(NewProductEvent message, IMessageHandlerContext context)
+        public Task Handle(NewProductSimpleEvent message, IMessageHandlerContext context)
         {
             LOG.Info(message + " arrived with success");
             return Task.FromResult(0);

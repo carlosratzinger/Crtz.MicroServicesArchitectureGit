@@ -22,11 +22,13 @@ namespace Crtz.ProductsContext.App.Cmd.EPoint.Saga
         {
             return @$"{nameof(NewProductSagaData.Name)}:{this.Name}
                       {nameof(NewProductSagaData.HasName)}:{ this.HasName}
+
                       {nameof(NewProductSagaData.Description)}:{ this.Description}
                       {nameof(NewProductSagaData.HasDescription)}:{ this.HasDescription}
+
                       {nameof(NewProductSagaData.Price)}:{ this.Price}
                       {nameof(NewProductSagaData.HasPrice)}:{ this.HasPrice}
-                    ".Trim();
+                    ".;
         }
     }
 }

@@ -16,7 +16,13 @@ namespace Crtz.ProductsContext.App.Cmd.EPoint.Saga
                                        IAmStartedByMessages<DescriptionProductEvent>,
                                        IAmStartedByMessages<PriceProductEvent>
     {
-        private static ILog LOG = LogManager.GetLogger<NewProductHandler>();
+        private static ILog LOG = LogManager.GetLogger<NewProductEventHandler>();
+        private IProductStorage productStorage;
+
+        public NewProductSagaHandler(IProductStorage productStorage)
+        {
+            this.productStorage = productStorage;
+        }
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<NewProductSagaData> mapper)
         {
@@ -67,11 +73,8 @@ namespace Crtz.ProductsContext.App.Cmd.EPoint.Saga
                     LOG.Info($"Saga is complete.");
                     LOG.Info($"Creating a new prroduct '{sagaData}'");
 
-                    using (var ctx = new EntityFrameworkContext())
-                    {
-                        ctx.Add(new Product(sagaData.Name, sagaData.Description, sagaData.Price.Value));
-                        ctx.SaveChanges();
-                    }
+                    Product product = new Product(sagaData.Name, sagaData.Description, sagaData.Price.Value);
+                    productStorage.Add(product);
 
                     LOG.Info($"Product created");
                     return true;
@@ -83,7 +86,7 @@ namespace Crtz.ProductsContext.App.Cmd.EPoint.Saga
             catch (Exception ex)
             {
                 throw ex;
-            }            
+            }
         }
     }
 }

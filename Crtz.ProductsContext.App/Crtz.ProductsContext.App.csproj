@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Crtz.Messages\Crtz.Messages.csproj" />
     <ProjectReference Include="..\Crtz.ProductsContext.Core\Crtz.ProductsContext.Core.csproj" />
-    <ProjectReference Include="..\Crtz.ProductsContext.Infra.Cmd.Endpoint\Crtz.ProductsContext.App.Cmd.EPoint.csproj" />
     <ProjectReference Include="..\Crtz.ProductsContext.Infra.Storage\Crtz.ProductsContext.Infra.Storage.csproj" />
     <ProjectReference Include="..\Crtz.ProductsContext.Infra\Crtz.ProductsContext.Infra.csproj" />
   </ItemGroup>

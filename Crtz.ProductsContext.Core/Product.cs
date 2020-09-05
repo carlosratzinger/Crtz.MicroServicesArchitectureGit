@@ -22,7 +22,7 @@ namespace Crtz.ProductsContext.Core
 
         public override string ToString()
         {
-            return string.Format(" ID:{0}; Name:{1}; Description:{1}; Price:{2}", this.Id, this.Name,  this.Description, this.Price);
+            return string.Format("Id:{0}; Name:{1}; Description:{1}; Price:{2}", this.Id, this.Name, this.Description, this.Price);
         }
 
     }

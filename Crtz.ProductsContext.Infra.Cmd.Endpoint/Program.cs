@@ -12,7 +12,7 @@ namespace Crtz.ProductsContext.App.Cmd.EPoint
 {
     class Program
     {
-        private const string endpointName = "ProductsContext_EndPoint";
+        private const string endpointName = "ProductsContext_EPoint";
         private static ILog LOG = LogManager.GetLogger<Program>();
 
         public static void Main(string[] args)
