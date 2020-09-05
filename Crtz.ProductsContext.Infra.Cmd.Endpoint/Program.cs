@@ -24,8 +24,9 @@ namespace Crtz.ProductsContext.App.Cmd.EPoint
         private static async Task InitializeEndpoint()
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
-            SerializationExtensions<NewtonsoftSerializer> serialization = endpointCfg.UseSerialization<NewtonsoftSerializer>();
-            TransportExtensions<LearningTransport> transport = endpointCfg.UseTransport<LearningTransport>();
+            endpointCfg.UseSerialization<NewtonsoftSerializer>();
+            endpointCfg.UseTransport<LearningTransport>();
+            endpointCfg.UsePersistence<LearningPersistence>();
 
             IEndpointInstance endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
 
