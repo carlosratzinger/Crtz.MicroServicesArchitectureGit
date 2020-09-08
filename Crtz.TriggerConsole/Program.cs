@@ -40,9 +40,9 @@ namespace Crtz.TriggerConsole
             Console.WriteLine();
             Console.WriteLine("TYPE:");
             Console.WriteLine("'A' to add a new default product");
-            Console.WriteLine("'B:{int:productId},{string:name}' to set just a product name");
-            Console.WriteLine("'C:{int:productId},{string:description}' to set just a product description");
-            Console.WriteLine("'D:{int:productId},{double:price}' to set just a product price");            
+            Console.WriteLine("'B:{int:SagaId},{string:name}' to set just a product name");
+            Console.WriteLine("'C:{int:SagaId},{string:description}' to set just a product description");
+            Console.WriteLine("'D:{int:SagaId},{double:price}' to set just a product price");            
             Console.WriteLine("Or, 'Q' to Quit");
 
             CancellationTokenSource cancellationToken = new CancellationTokenSource();

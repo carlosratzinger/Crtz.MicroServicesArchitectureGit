@@ -1,0 +1,14 @@
+{
+  "NServiceBus.MessageId": "89536007-a27d-45b4-9a8a-ac300118633a",
+  "NServiceBus.MessageIntent": "Publish",
+  "NServiceBus.ConversationId": "93447512-1a2b-4b41-a235-ac300118633b",
+  "NServiceBus.CorrelationId": "89536007-a27d-45b4-9a8a-ac300118633a",
+  "NServiceBus.ReplyToAddress": "Sender",
+  "NServiceBus.OriginatingMachine": "FDERIVSWS0025",
+  "NServiceBus.OriginatingEndpoint": "Sender",
+  "$.diagnostics.originating.hostid": "e7de674c6f3d5050ba77d82078b35c27",
+  "NServiceBus.ContentType": "application\/json",
+  "NServiceBus.EnclosedMessageTypes": "Crtz.Messages.Events.NameProductEvent, Crtz.Messages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "NServiceBus.Version": "7.4.2",
+  "NServiceBus.TimeSent": "2020-09-08 17:00:51:710472 Z"
+}
