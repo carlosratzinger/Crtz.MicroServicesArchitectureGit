@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,9 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="NServiceBus" Version="7.4.2" />
+    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Crtz.BasicContext.Core\Crtz.BasicContext.Core.csproj" />
     <ProjectReference Include="..\Crtz.BasicContext.Infra.Storage\Crtz.BasicContext.Infra.Storage.csproj" />
     <ProjectReference Include="..\Crtz.BasicContext.Infra\Crtz.BasicContext.Infra.csproj" />
+    <ProjectReference Include="..\Crtz.Messages\Crtz.Messages.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\Sagas\" />
   </ItemGroup>
 
 </Project>
