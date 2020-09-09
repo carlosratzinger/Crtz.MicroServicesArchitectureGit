@@ -1,4 +1,5 @@
-﻿using NServiceBus;
+﻿using Crtz.Common;
+using NServiceBus;
 using NServiceBus.Logging;
 using System;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace Crtz.BasicContext.App.EPoint.Cmd
 {
     public class Program
     {
-        private const string endpointName = "BasicContext_EPoint";
+        private const string endpointName = EntpointNames.BasicContext_EPoint;
         private static ILog LOG = LogManager.GetLogger<Program>();
 
         public static void Main(string[] args)

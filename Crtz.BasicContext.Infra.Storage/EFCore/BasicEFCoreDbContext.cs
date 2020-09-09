@@ -1,28 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Crtz.BasicContext.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crtz.BasicContext.Infra.Storage.EFCore
 {
     public class BasicEFCoreDbContext : DbContext
     {
-        //public ProductEFDbContext(string connectionStringName)
-        //    : base(connectionStringName)
-        //{
-        //    Database.SetInitializer<ProductEFDbContext>(null);
-        //    Configuration.LazyLoadingEnabled = false;
-        //}
+        public BasicEFCoreDbContext(DbContextOptions<BasicEFCoreDbContext> options)
+        { }
 
-        //public ProductEFDbContext(IDbConnection connection)
-        //    : base((DbConnection)connection, false)
-        //{
-        //    Database.SetInitializer<ProductEFDbContext>(null);
-        //    Configuration.LazyLoadingEnabled = false;
-        //}
+        public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<SaleItem> SaleItems { get; set; }
 
-        //public virtual DbSet<Product> Products { get; set; }
-
-        //protected override void OnModelCreating(DbModelBuilder builder)
-        //{
-        //    builder.Configurations.Add(new ProductConfiguration());
-        //}
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new SaleConfiguration());
+            builder.ApplyConfiguration(new SaleItemsConfiguration());
+        }
     }
 }

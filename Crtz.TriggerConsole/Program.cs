@@ -1,4 +1,6 @@
-﻿using Crtz.Messages.Events;
+﻿using Crtz.Common;
+using Crtz.Messages.Commands;
+using Crtz.Messages.Events;
 using NServiceBus;
 using NServiceBus.Logging;
 using NServiceBus.Serialization;
@@ -38,11 +40,12 @@ namespace Crtz.TriggerConsole
         private static Task Worker(IEndpointInstance endpointInstance)
         {
             Console.WriteLine();
-            Console.WriteLine("TYPE:");
-            Console.WriteLine("'A' to add a new default product");
+            Console.WriteLine("'A' to create a NewProductEvent");
             Console.WriteLine("'B:{int:SagaId},{string:name}' to set just a product name");
             Console.WriteLine("'C:{int:SagaId},{string:description}' to set just a product description");
-            Console.WriteLine("'D:{int:SagaId},{double:price}' to set just a product price");            
+            Console.WriteLine("'D:{int:SagaId},{double:price}' to set just a product price");
+            Console.WriteLine();
+            Console.WriteLine("'E: to create a NewSaleCommand");
             Console.WriteLine("Or, 'Q' to Quit");
 
             CancellationTokenSource cancellationToken = new CancellationTokenSource();
@@ -51,25 +54,16 @@ namespace Crtz.TriggerConsole
                 try
                 {
                     string typedValue = Console.ReadLine();
-
                     string command = string.Empty;
+
+                    string[] splitedValues = typedValue.Split(":");
+                    command = splitedValues[0];
+
                     string[] informedData = null;
-
-                    if (typedValue.StartsWith("A"))
+                    if (command == "B" || command == "C" || command == "D")
                     {
-                        command = "A";
-                    }
-                    else if (typedValue.StartsWith("B") || typedValue.StartsWith("C") || typedValue.StartsWith("D"))
-                    {
-                        string[] splitedValues = typedValue.Split(":");
-
-                        command = splitedValues[0];
                         informedData = splitedValues[1].Split(",");
                     }
-                    else if (typedValue.StartsWith("Q"))
-                    {
-                        command = "Q";
-                    }            
 
                     switch (command)
                     {
@@ -106,6 +100,15 @@ namespace Crtz.TriggerConsole
                                 LOG.Info($"\n\n Publishing a {nameof(PriceProductEvent)}: {evnt} \n\n");
 
                                 endpointInstance.Publish(evnt).ConfigureAwait(false);
+                                continue;
+                            }
+
+                        case "E":
+                            {
+                                CreateNewSaleCommand evnt = new CreateNewSaleCommand();
+                                LOG.Info($"\n\n Publishing a {nameof(CreateNewSaleCommand)}: {evnt} \n\n");
+
+                                endpointInstance.Send(EntpointNames.BasicContext_EPoint, evnt).ConfigureAwait(false);
                                 continue;
                             }
 

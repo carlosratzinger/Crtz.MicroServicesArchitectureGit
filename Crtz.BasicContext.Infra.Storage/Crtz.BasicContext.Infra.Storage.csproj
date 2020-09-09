@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EFCore\SaleItemsStorage.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Crtz.BasicContext.Core\Crtz.BasicContext.Core.csproj" />
     <ProjectReference Include="..\Crtz.BasicContext.Infra\Crtz.BasicContext.Infra.csproj" />
   </ItemGroup>

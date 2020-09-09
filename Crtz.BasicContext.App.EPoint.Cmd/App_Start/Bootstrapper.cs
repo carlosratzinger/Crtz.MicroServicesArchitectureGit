@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Crtz.BasicContext.Core;
+using Crtz.BasicContext.Infra.Storage.EFCore;
 
 namespace Crtz.BasicContext.App.EPoint.Cmd
 {
@@ -9,7 +11,7 @@ namespace Crtz.BasicContext.App.EPoint.Cmd
         public static void Initialize()
         {
             ContainerBuilder builder = new ContainerBuilder();
-            //builder.RegisterType<ProductStorage>().As<IProductStorage>();
+            builder.RegisterType<SaleStorage>().As<ISaleStorage>();
             //--- Others
 
             Container = builder.Build();

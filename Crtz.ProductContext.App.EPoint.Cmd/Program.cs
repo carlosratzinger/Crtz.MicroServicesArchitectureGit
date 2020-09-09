@@ -8,12 +8,13 @@ using NServiceBus;
 using NServiceBus.Logging;
 using Crtz.ProductContext.Core;
 using Crtz.ProductContext.Infra.Storage.EF;
+using Crtz.Common;
 
 namespace Crtz.ProductContext.App.EPoint.Cmd
 {
     public class Program
     {
-        private const string endpointName = "ProductsContext_EPoint";
+        private const string endpointName = EntpointNames.ProductContext_EPoint;
         private static ILog LOG = LogManager.GetLogger<Program>();
 
         public static void Main(string[] args)
