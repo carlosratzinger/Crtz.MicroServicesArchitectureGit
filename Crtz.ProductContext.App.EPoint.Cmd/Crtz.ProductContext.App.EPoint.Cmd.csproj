@@ -90,6 +90,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Crtz.Common\Crtz.Common.csproj">
+      <Project>{B1A6C8DB-16CC-4F0C-8AA4-3D452CD95196}</Project>
+      <Name>Crtz.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Crtz.Messages\Crtz.Messages.csproj">
       <Project>{c0c85a96-36b2-4426-84e6-1a39621f3872}</Project>
       <Name>Crtz.Messages</Name>

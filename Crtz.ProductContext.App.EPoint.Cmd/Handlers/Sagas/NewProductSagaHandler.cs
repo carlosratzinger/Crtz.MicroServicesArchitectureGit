@@ -34,8 +34,10 @@ namespace Crtz.ProductContext.App.EPoint.Cmd.Handlers
             Data.Name = message.Name;
 
             if (CreateNewProduct(Data, context))
+            {
+                this.MarkAsComplete();
                 return Task.CompletedTask;
-
+            }
             return Task.FromResult(0);
         }
 
@@ -45,8 +47,10 @@ namespace Crtz.ProductContext.App.EPoint.Cmd.Handlers
             Data.Description = message.Description;
 
             if (CreateNewProduct(Data, context))
+            {
+                this.MarkAsComplete();
                 return Task.CompletedTask;
-
+            }
             return Task.FromResult(0);
         }
 
@@ -56,8 +60,10 @@ namespace Crtz.ProductContext.App.EPoint.Cmd.Handlers
             Data.Price = message.Price;
 
             if (CreateNewProduct(Data, context))
+            {
+                this.MarkAsComplete();
                 return Task.CompletedTask;
-
+            }
             return Task.FromResult(0);
         }
 
