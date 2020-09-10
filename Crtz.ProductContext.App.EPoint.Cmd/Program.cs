@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using Autofac;
 using NServiceBus;
 using NServiceBus.Logging;
-using Crtz.ProductContext.Core;
-using Crtz.ProductContext.Infra.Storage.EF;
 using Crtz.Common;
+using System.Configuration;
 
 namespace Crtz.ProductContext.App.EPoint.Cmd
 {
     public class Program
-    {
-        private const string endpointName = EntpointNames.ProductContext_EPoint;
+    {   
         private static ILog LOG = LogManager.GetLogger<Program>();
+
+        private static string endpointName = EntpointNames.ProductContext_EPoint;
+        private static IEndpointInstance endpointInstance;
 
         public static void Main(string[] args)
         {
@@ -28,11 +29,12 @@ namespace Crtz.ProductContext.App.EPoint.Cmd
         private static async Task InitializeEndpoint()
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
-            endpointCfg.UseSerialization<NewtonsoftSerializer>();
-            endpointCfg.UseTransport<LearningTransport>();
-            endpointCfg.UsePersistence<LearningPersistence>();
 
-            IEndpointInstance endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
+            ConfigureSerialization(endpointCfg);
+            ConfigureTransport(endpointCfg);
+            ConfigurePersistence(endpointCfg);
+
+            endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
 
             Console.WriteLine($"{endpointName} endpoint started with success");
             Console.WriteLine();
@@ -41,6 +43,22 @@ namespace Crtz.ProductContext.App.EPoint.Cmd
 
             Console.ReadLine();
             await endpointInstance.Stop().ConfigureAwait(false);
+        }
+
+        private static void ConfigureSerialization(EndpointConfiguration endpointCfg)
+        {
+            endpointCfg.UseSerialization<NewtonsoftSerializer>();
+        }
+
+        private static void ConfigureTransport(EndpointConfiguration endpointCfg)
+        {
+            TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
+            transport.ConnectionString(ConfigurationManager.ConnectionStrings[ConnectionStringNames.AzureServiceBusTransport].ToString());
+        }
+
+        private static void ConfigurePersistence(EndpointConfiguration endpointCfg)
+        {
+            endpointCfg.UsePersistence<LearningPersistence>();
         }
     }
 }

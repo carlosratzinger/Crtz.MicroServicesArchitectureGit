@@ -1,37 +1,66 @@
-﻿using NServiceBus;
+﻿using Crtz.Common;
+using Microsoft.Extensions.Configuration;
+using NServiceBus;
 using NServiceBus.Logging;
 using NServiceBus.Serialization;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Crtz.TriggerConsole.Receiver
 {
     public class Program
     {
-        const string endpointName = "Receiver";
-        static ILog LOG = LogManager.GetLogger<Program>();
+        private static ILog LOG = LogManager.GetLogger<Program>();
+
+        private static string endpointName = "Receiver";        
+        private static IConfigurationRoot configuration;
+        private static IEndpointInstance endpointInstance;
 
         static void Main(string[] args)
         {
             Console.Title = endpointName;
-            AsyncMain().GetAwaiter().GetResult();
+
+            configuration = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+                 .AddJsonFile("appsettings.json", false)
+                 .Build();
+
+            StartEndpoint().GetAwaiter().GetResult();
         }
 
-        private static async Task AsyncMain()
+        private static async Task StartEndpoint()
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
-            SerializationExtensions<NewtonsoftSerializer> serialization = endpointCfg.UseSerialization<NewtonsoftSerializer>();
-            TransportExtensions<LearningTransport> transport = endpointCfg.UseTransport<LearningTransport>();
 
-            IEndpointInstance endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
+            ConfigureSerialization(endpointCfg);
+            ConfigureTransport(endpointCfg);
+            ConfigurePersistence(endpointCfg);
 
-            Console.WriteLine($"{endpointName} endpoint started with success");
-            Console.WriteLine();
-            Console.WriteLine("Press Enter to exit.");
-            Console.WriteLine();
+            endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
+
             Console.ReadLine();
 
-            await endpointInstance.Stop().ConfigureAwait(false);
+            await endpointInstance.Stop()
+                .ConfigureAwait(false);
+        }
+
+        private static void ConfigureSerialization(EndpointConfiguration endpointCfg)
+        {
+            endpointCfg.UseSerialization<NewtonsoftSerializer>();
+        }
+
+        private static void ConfigureTransport(EndpointConfiguration endpointCfg)
+        {
+            endpointCfg.EnableInstallers();
+
+            TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
+            transport.ConnectionString(configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
+        }
+
+        private static void ConfigurePersistence(EndpointConfiguration endpointCfg)
+        {
+            return;
         }
     }
 }
