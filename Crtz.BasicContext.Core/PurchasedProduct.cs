@@ -7,12 +7,12 @@ namespace Crtz.BasicContext.Core
     public class PurchasedProduct
     {
         public int Id { get; private set; }
-        public double Price { get; private set; }        
+        public double Price { get; private set; }
 
         public PurchasedProduct(int id, double price)
         {
             this.Id = id;
-            this.Price = price;            
+            this.Price = price;
         }
 
         public override string ToString()

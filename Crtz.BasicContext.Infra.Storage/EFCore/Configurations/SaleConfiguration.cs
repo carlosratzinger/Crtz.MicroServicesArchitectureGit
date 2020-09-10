@@ -11,11 +11,11 @@ namespace Crtz.BasicContext.Infra.Storage.EFCore
     {
         public void Configure(EntityTypeBuilder<Sale> builder)
         {
-            //builder.ToTable("TB_SALES");
+            builder.ToTable("TB_SALES");
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Date);
-            builder.Property(p => p.SaleItems);
+            //builder.Property(p => p.SaleItems);
         }
     }
 }

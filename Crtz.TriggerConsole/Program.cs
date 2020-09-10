@@ -57,12 +57,12 @@ namespace Crtz.TriggerConsole
                     string command = string.Empty;
 
                     string[] splitedValues = typedValue.Split(":");
-                    command = splitedValues[0];
+                    command = splitedValues[0].ToUpper();
 
-                    string[] informedData = null;
+                    string[] additionalData = null;
                     if (command == "B" || command == "C" || command == "D")
                     {
-                        informedData = splitedValues[1].Split(",");
+                        additionalData = splitedValues[1].Split(",");
                     }
 
                     switch (command)
@@ -78,7 +78,7 @@ namespace Crtz.TriggerConsole
 
                         case "B":
                             {
-                                NameProductEvent evnt = new NameProductEvent(Convert.ToInt32(informedData[0]), informedData[1]);
+                                NameProductEvent evnt = new NameProductEvent(Convert.ToInt32(additionalData[0]), additionalData[1]);
                                 LOG.Info($"\n\n Publishing a {nameof(NameProductEvent)}: {evnt} \n");
 
                                 endpointInstance.Publish(evnt).ConfigureAwait(false);
@@ -87,7 +87,7 @@ namespace Crtz.TriggerConsole
 
                         case "C":
                             {
-                                DescriptionProductEvent evnt = new DescriptionProductEvent(Convert.ToInt32(informedData[0]), informedData[1]);
+                                DescriptionProductEvent evnt = new DescriptionProductEvent(Convert.ToInt32(additionalData[0]), additionalData[1]);
                                 LOG.Info($"\n\n Publishing a {nameof(DescriptionProductEvent)}: {evnt} \n\n");
 
                                 endpointInstance.Publish(evnt).ConfigureAwait(false);
@@ -96,7 +96,7 @@ namespace Crtz.TriggerConsole
 
                         case "D":
                             {
-                                PriceProductEvent evnt = new PriceProductEvent(Convert.ToInt32(informedData[0]), Convert.ToDouble(informedData[1]));
+                                PriceProductEvent evnt = new PriceProductEvent(Convert.ToInt32(additionalData[0]), Convert.ToDouble(additionalData[1]));
                                 LOG.Info($"\n\n Publishing a {nameof(PriceProductEvent)}: {evnt} \n\n");
 
                                 endpointInstance.Publish(evnt).ConfigureAwait(false);
@@ -106,6 +106,11 @@ namespace Crtz.TriggerConsole
                         case "E":
                             {
                                 CreateNewSaleCommand evnt = new CreateNewSaleCommand();
+                                evnt.AddSaleItem(1, 20, 10);
+                                evnt.AddSaleItem(2, 21, 11);
+                                evnt.AddSaleItem(3, 22, 12);
+                                evnt.AddSaleItem(4, 23, 13);
+
                                 LOG.Info($"\n\n Publishing a {nameof(CreateNewSaleCommand)}: {evnt} \n\n");
 
                                 endpointInstance.Send(EntpointNames.BasicContext_EPoint, evnt).ConfigureAwait(false);

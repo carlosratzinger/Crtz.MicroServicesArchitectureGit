@@ -24,12 +24,15 @@ namespace Crtz.BasicContext.App.EPoint.Cmd.Handlers
         {
             LOG.Info($"Incomimng {message}");
 
-            //SaleRegister saleRegister = new SaleRegister(saleStorage);
-            //saleRegister.BeginNewSale();
-            //saleRegister.SetItem(null, 10);
-            //saleRegister.Save();
+            SaleRegister saleRegister = new SaleRegister(saleStorage);
+            saleRegister.BeginNewSale();
 
-            //--- Call some class of Core to perform
+            //foreach (var saleItem in message.SaleItems)
+            //{
+            //    saleRegister.SetItem(saleItem.Key, saleItem.Value.Item1, saleItem.Value.Item2);
+            //}
+
+            saleRegister.Save();
             return Task.CompletedTask;
         }
     }

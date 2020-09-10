@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Crtz.BasicContext.Core
@@ -10,8 +11,9 @@ namespace Crtz.BasicContext.Core
 
         public int Id { get; private set; }
         public DateTime Date { get; private set; }
+
         public List<SaleItem> SaleItems { get; private set; } = new List<SaleItem>();
-        public Payment Payment { get; private set; }
+        //public Payment Payment { get; private set; }
 
         public Sale()
         {
@@ -28,16 +30,15 @@ namespace Crtz.BasicContext.Core
             double total = 0;
 
             foreach (var saleItem in this.SaleItems)
-            {
                 total += saleItem.GetSubtotal();
-            }
 
             return total;
         }
 
         public double GetBalance()
         {
-            return Payment.Quantity - GetTotal();
+            //return Payment.Quantity - GetTotal();
+            return 0;
         }
 
         public void MarkAsComplete()
@@ -52,7 +53,7 @@ namespace Crtz.BasicContext.Core
 
         public void DoPayment(double providedQuantity)
         {
-            this.Payment = new Payment(providedQuantity);
+            //this.Payment = new Payment(providedQuantity);
         }
     }
 }

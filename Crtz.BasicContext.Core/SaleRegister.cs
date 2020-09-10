@@ -26,10 +26,12 @@ namespace Crtz.BasicContext.Core
             Console.WriteLine("Sale finished");
         }
 
-        public void SetItem(PurchasedProduct product, int quantity)
-        {   
-            sale.CreateSaleItem(product, quantity);
-            Console.WriteLine($"New SaleItem: '{product}' created");
+        public void SetItem(int productId, double price, int quantity)
+        {
+            PurchasedProduct purchasedProduct = new PurchasedProduct(productId, price);
+
+            sale.CreateSaleItem(purchasedProduct, quantity);
+            Console.WriteLine($"New SaleItem: '{productId}/{quantity}' created");
         }
 
         public void Save()
