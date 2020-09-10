@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crtz.Common;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -10,7 +11,7 @@ namespace Crtz.ProductContext.Infra.Storage
 {
     public static class ConnectionFactory
     {
-        public const string connectionStringName = "MainConnection";
+        public const string connectionStringName = ConnectionStringNames.MainDBConnection;
 
         public static SqlConnection GetConnection()
         {

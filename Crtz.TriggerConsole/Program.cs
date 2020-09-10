@@ -30,10 +30,10 @@ namespace Crtz.TriggerConsole
                  .AddJsonFile("appsettings.json", false)
                  .Build();
 
-            StartEndpoint().GetAwaiter().GetResult();
+            InitializeEndpoint().GetAwaiter().GetResult();
         }
 
-        private static async Task StartEndpoint()
+        private static async Task InitializeEndpoint()
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
 

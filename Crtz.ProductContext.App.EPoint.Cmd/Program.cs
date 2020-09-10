@@ -52,8 +52,12 @@ namespace Crtz.ProductContext.App.EPoint.Cmd
 
         private static void ConfigureTransport(EndpointConfiguration endpointCfg)
         {
+            endpointCfg.EnableInstallers();
+
             TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
             transport.ConnectionString(ConfigurationManager.ConnectionStrings[ConnectionStringNames.AzureServiceBusTransport].ToString());
+
+            //endpointCfg.UseTransport<LearningTransport>();
         }
 
         private static void ConfigurePersistence(EndpointConfiguration endpointCfg)

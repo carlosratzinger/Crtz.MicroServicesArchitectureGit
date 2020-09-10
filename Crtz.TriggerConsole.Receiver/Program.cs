@@ -26,10 +26,10 @@ namespace Crtz.TriggerConsole.Receiver
                  .AddJsonFile("appsettings.json", false)
                  .Build();
 
-            StartEndpoint().GetAwaiter().GetResult();
+            InitializeEndpoint().GetAwaiter().GetResult();
         }
 
-        private static async Task StartEndpoint()
+        private static async Task InitializeEndpoint()
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
 
@@ -56,6 +56,8 @@ namespace Crtz.TriggerConsole.Receiver
 
             TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
             transport.ConnectionString(configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
+
+            //endpointCfg.UseTransport<AzureServiceBusTransport>();
         }
 
         private static void ConfigurePersistence(EndpointConfiguration endpointCfg)

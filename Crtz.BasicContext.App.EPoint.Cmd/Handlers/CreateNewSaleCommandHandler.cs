@@ -32,7 +32,7 @@ namespace Crtz.BasicContext.App.EPoint.Cmd.Handlers
             //    saleRegister.SetItem(saleItem.Key, saleItem.Value.Item1, saleItem.Value.Item2);
             //}
 
-            saleRegister.Save();
+            //saleRegister.Save();
             return Task.CompletedTask;
         }
     }

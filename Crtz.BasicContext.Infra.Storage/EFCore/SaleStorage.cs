@@ -9,7 +9,6 @@ namespace Crtz.BasicContext.Infra.Storage.EFCore
 {
     public class SaleStorage : ISaleStorage
     {
-        //private SqlConnection connection = ConnectionFactory.GetConnection();
         private DbContextOptionsBuilder<BasicEFCoreDbContext> optionsBuilder = new DbContextOptionsBuilder<BasicEFCoreDbContext>();
         private string connectionString = @"Data Source=localhost\SQLEXPRESS; Trusted_Connection=True; Database=DB_BasicContext;";
 

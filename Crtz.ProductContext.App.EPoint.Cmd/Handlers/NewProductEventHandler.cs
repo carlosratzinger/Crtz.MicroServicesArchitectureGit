@@ -25,7 +25,7 @@ namespace Crtz.ProductContext.App.EPoint.Cmd.Handlers
             LOG.Info($"Incomimng {message}");
 
             ProductsCatalog catalog = new ProductsCatalog(productStorage);
-            catalog.AddNewProduct(new Product(message.Name, message.Description, message.Price));
+            //catalog.AddNewProduct(new Product(message.Name, message.Description, message.Price));
 
             return Task.CompletedTask;
         }
