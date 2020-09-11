@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.2.0" />
+    <PackageReference Include="NServiceBus.Transport.AzureServiceBus" Version="1.5.0" />
   </ItemGroup>
 
 </Project>
