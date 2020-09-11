@@ -15,6 +15,7 @@ namespace Crtz.BasicContext.App.EPoint.Cmd
 
         public static void Main(string[] args)
         {
+            Console.Title = EndpointNames.BasicContext_EPoint;
             CreateHostBuilder(args).Build().Run();
         }
 

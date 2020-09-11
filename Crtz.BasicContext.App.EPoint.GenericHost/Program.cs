@@ -14,6 +14,7 @@ namespace Crtz.BasicContext.App.EPoint.GenericHost
 
         public static void Main(string[] args)
         {
+            Console.Title = EndpointNames.BasicContext_EPoint;
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -42,7 +43,7 @@ namespace Crtz.BasicContext.App.EPoint.GenericHost
 
             builder.UseNServiceBus(hostContext =>
             {
-                EndpointConfiguration endpointCfg = new EndpointConfiguration(EndpointNames.BasicContext_EPoint1);
+                EndpointConfiguration endpointCfg = new EndpointConfiguration(EndpointNames.BasicContext_EPoint);
 
                 EndpointConfig.ConfigureSerialization(endpointCfg);
                 EndpointConfig.ConfigureTransport(endpointCfg, configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
