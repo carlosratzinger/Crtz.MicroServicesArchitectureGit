@@ -1,5 +1,6 @@
 ﻿using Crtz.Common;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using NServiceBus;
 using NServiceBus.Logging;
 using System;
@@ -10,62 +11,48 @@ namespace Crtz.BasicContext.App.EPoint.Cmd
 {
     public class Program
     {
-        private static ILog LOG = LogManager.GetLogger<Program>();
-
-        private static string endpointName = EndpointNames.BasicContext_EPoint;
         private static IConfigurationRoot configuration;
-        private static IEndpointInstance endpointInstance;
 
         public static void Main(string[] args)
         {
-            Console.Title = endpointName;
-
-            configuration = new ConfigurationBuilder()
-               .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-               .AddJsonFile("appsettings.json", false)
-               .Build();
-
-            Bootstrapper.Initialize();
-            InitializeEndpoint().GetAwaiter().GetResult();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        private static async Task InitializeEndpoint()
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
+            IHostBuilder builder = Host.CreateDefaultBuilder(args);
+            builder.UseConsoleLifetime();
 
-            ConfigureSerialization(endpointCfg);
-            ConfigureTransport(endpointCfg);
-            ConfigurePersistence(endpointCfg);
+            builder.ConfigureServices((hostContext, services) =>
+            {
+                Bootstrapper.Initialize();
 
-            endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
+                //services.AddHostedService<LifetimeEventsHostedService>();
+                //services.AddHostedService<Worker>();
+            });
 
-            Console.WriteLine($"{endpointName} endpoint started with success");
-            Console.WriteLine();
-            Console.WriteLine("Press any key to exit.");
-            Console.WriteLine();
+            builder.ConfigureHostConfiguration(configHost =>
+            {
+                configHost.SetBasePath(Directory.GetCurrentDirectory());
+                configHost.AddJsonFile("appsettings.json", optional: false);
+                configHost.AddEnvironmentVariables(prefix: "DOTNET_");
+                configHost.AddCommandLine(args);
 
-            Console.ReadLine();
-            await endpointInstance.Stop().ConfigureAwait(false);
-        }
+                configuration = configHost.Build();
+            });
 
-        private static void ConfigureSerialization(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.UseSerialization<NewtonsoftSerializer>();
-        }
+            builder.UseNServiceBus(hostContext =>
+            {
+                EndpointConfiguration endpointCfg = new EndpointConfiguration(EndpointNames.BasicContext_EPoint);
 
-        private static void ConfigureTransport(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.EnableInstallers();
+                EndpointConfig.ConfigureSerialization(endpointCfg);
+                EndpointConfig.ConfigureTransport(endpointCfg, configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
+                EndpointConfig.ConfigurePersistence(endpointCfg);
 
-            TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
-            transport.ConnectionString(configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
+                return endpointCfg;
+            });
 
-            //endpointCfg.UseTransport<LearningTransport>();
-        }
-
-        private static void ConfigurePersistence(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.UsePersistence<LearningPersistence>();
+            return builder;
         }
     }
 }

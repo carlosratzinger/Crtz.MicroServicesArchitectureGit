@@ -42,7 +42,7 @@ namespace Crtz.BasicContext.App.EPoint.GenericHost
 
             builder.UseNServiceBus(hostContext =>
             {
-                EndpointConfiguration endpointCfg = new EndpointConfiguration(EndpointNames.BasicContext_EPoint);
+                EndpointConfiguration endpointCfg = new EndpointConfiguration(EndpointNames.BasicContext_EPoint1);
 
                 EndpointConfig.ConfigureSerialization(endpointCfg);
                 EndpointConfig.ConfigureTransport(endpointCfg, configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));

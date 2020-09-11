@@ -37,9 +37,9 @@ namespace Crtz.TriggerConsole
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
 
-            ConfigureSerialization(endpointCfg);
-            ConfigureTransport(endpointCfg);
-            ConfigurePersistence(endpointCfg);
+            EndpointConfig.ConfigureSerialization(endpointCfg);
+            EndpointConfig.ConfigureTransport(endpointCfg, configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
+            EndpointConfig.ConfigurePersistence(endpointCfg);
 
             endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
 
@@ -48,26 +48,6 @@ namespace Crtz.TriggerConsole
 
             await endpointInstance.Stop()
                 .ConfigureAwait(false);
-        }
-
-        private static void ConfigureSerialization(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.UseSerialization<NewtonsoftSerializer>();
-        }
-
-        private static void ConfigureTransport(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.EnableInstallers();
-
-            TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
-            transport.ConnectionString(configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
-
-            //endpointCfg.UseTransport<LearningTransport>();
-        }
-
-        private static void ConfigurePersistence(EndpointConfiguration endpointCfg)
-        {
-            return;
         }
 
         private static Task Worker(IEndpointInstance endpointInstance)
@@ -147,6 +127,7 @@ namespace Crtz.TriggerConsole
                                 LOG.Info($"\n\n Publishing a {nameof(CreateNewSaleCommand)}: {evnt} \n\n");
 
                                 endpointInstance.Send(EndpointNames.BasicContext_EPoint, evnt).ConfigureAwait(false);
+                                endpointInstance.Send(EndpointNames.BasicContext_EPoint1, evnt).ConfigureAwait(false);
                                 continue;
                             }
 

@@ -30,9 +30,9 @@ namespace Crtz.ProductContext.App.EPoint.Cmd
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
 
-            ConfigureSerialization(endpointCfg);
-            ConfigureTransport(endpointCfg);
-            ConfigurePersistence(endpointCfg);
+            EndpointConfig.ConfigureSerialization(endpointCfg);
+            EndpointConfig.ConfigureTransport(endpointCfg, ConfigurationManager.ConnectionStrings[ConnectionStringNames.AzureServiceBusTransport].ToString());
+            EndpointConfig.ConfigureLearningPersistence(endpointCfg);
 
             endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
 
@@ -43,26 +43,6 @@ namespace Crtz.ProductContext.App.EPoint.Cmd
 
             Console.ReadLine();
             await endpointInstance.Stop().ConfigureAwait(false);
-        }
-
-        private static void ConfigureSerialization(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.UseSerialization<NewtonsoftSerializer>();
-        }
-
-        private static void ConfigureTransport(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.EnableInstallers();
-
-            TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
-            transport.ConnectionString(ConfigurationManager.ConnectionStrings[ConnectionStringNames.AzureServiceBusTransport].ToString());
-
-            //endpointCfg.UseTransport<LearningTransport>();
-        }
-
-        private static void ConfigurePersistence(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.UsePersistence<LearningPersistence>();
         }
     }
 }

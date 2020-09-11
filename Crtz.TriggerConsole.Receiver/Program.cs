@@ -33,9 +33,9 @@ namespace Crtz.TriggerConsole.Receiver
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
 
-            ConfigureSerialization(endpointCfg);
-            ConfigureTransport(endpointCfg);
-            ConfigurePersistence(endpointCfg);
+            EndpointConfig.ConfigureSerialization(endpointCfg);
+            EndpointConfig.ConfigureTransport(endpointCfg, configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
+            EndpointConfig.ConfigurePersistence(endpointCfg);
 
             endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
 
@@ -43,26 +43,6 @@ namespace Crtz.TriggerConsole.Receiver
 
             await endpointInstance.Stop()
                 .ConfigureAwait(false);
-        }
-
-        private static void ConfigureSerialization(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.UseSerialization<NewtonsoftSerializer>();
-        }
-
-        private static void ConfigureTransport(EndpointConfiguration endpointCfg)
-        {
-            endpointCfg.EnableInstallers();
-
-            TransportExtensions<AzureServiceBusTransport> transport = endpointCfg.UseTransport<AzureServiceBusTransport>();
-            transport.ConnectionString(configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
-
-            //endpointCfg.UseTransport<AzureServiceBusTransport>();
-        }
-
-        private static void ConfigurePersistence(EndpointConfiguration endpointCfg)
-        {
-            return;
-        }
+        }     
     }
 }

@@ -22,6 +22,11 @@ namespace Crtz.Common
             //endpointCfg.UseTransport<LearningTransport>();
         }
 
+        public static void ConfigureLearningPersistence(EndpointConfiguration endpointCfg)
+        {
+            endpointCfg.UsePersistence<LearningPersistence>();
+        }
+
         public static void ConfigurePersistence(EndpointConfiguration endpointCfg)
         {
             return;
