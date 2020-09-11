@@ -12,7 +12,7 @@ namespace Crtz.BasicContext.App.EPoint.Cmd
     {
         private static ILog LOG = LogManager.GetLogger<Program>();
 
-        private static string endpointName = EntpointNames.BasicContext_EPoint;
+        private static string endpointName = EndpointNames.BasicContext_EPoint;
         private static IConfigurationRoot configuration;
         private static IEndpointInstance endpointInstance;
 

@@ -15,7 +15,7 @@ namespace Crtz.ProductContext.App.EPoint.Cmd
     {   
         private static ILog LOG = LogManager.GetLogger<Program>();
 
-        private static string endpointName = EntpointNames.ProductContext_EPoint;
+        private static string endpointName = EndpointNames.ProductContext_EPoint;
         private static IEndpointInstance endpointInstance;
 
         public static void Main(string[] args)

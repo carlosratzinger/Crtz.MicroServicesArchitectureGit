@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crtz.BasicContext.Core", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crtz.BasicContext.App", "Crtz.BasicContext.App\Crtz.BasicContext.App.csproj", "{D68E6BC2-97C9-41E5-9E3F-EDE2F04A7EC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crtz.BasicContext.App.EPoint.GenericHost", "Crtz.BasicContext.App.EPoint.GenericHost\Crtz.BasicContext.App.EPoint.GenericHost.csproj", "{1BFE4694-39D9-4A9D-8A91-7C76AB9FF7E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,10 @@ Global
 		{D68E6BC2-97C9-41E5-9E3F-EDE2F04A7EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D68E6BC2-97C9-41E5-9E3F-EDE2F04A7EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D68E6BC2-97C9-41E5-9E3F-EDE2F04A7EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BFE4694-39D9-4A9D-8A91-7C76AB9FF7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BFE4694-39D9-4A9D-8A91-7C76AB9FF7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BFE4694-39D9-4A9D-8A91-7C76AB9FF7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BFE4694-39D9-4A9D-8A91-7C76AB9FF7E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +165,7 @@ Global
 		{2CBBA4F3-045E-4A9A-B795-547CB6D2FF69} = {14B6867C-9EDD-46B7-8DB1-C790D87295AC}
 		{B9E07AF5-4F09-43C4-826D-277D958984DC} = {D9CD4E43-D2E7-440E-961E-8148380EF7D0}
 		{D68E6BC2-97C9-41E5-9E3F-EDE2F04A7EC8} = {14B6867C-9EDD-46B7-8DB1-C790D87295AC}
+		{1BFE4694-39D9-4A9D-8A91-7C76AB9FF7E8} = {14B6867C-9EDD-46B7-8DB1-C790D87295AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F16C9487-5EE4-4BAC-AD60-2369F1AD702E}

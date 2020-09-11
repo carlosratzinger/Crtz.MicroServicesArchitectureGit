@@ -146,7 +146,7 @@ namespace Crtz.TriggerConsole
 
                                 LOG.Info($"\n\n Publishing a {nameof(CreateNewSaleCommand)}: {evnt} \n\n");
 
-                                endpointInstance.Send(EntpointNames.BasicContext_EPoint, evnt).ConfigureAwait(false);
+                                endpointInstance.Send(EndpointNames.BasicContext_EPoint, evnt).ConfigureAwait(false);
                                 continue;
                             }
 
