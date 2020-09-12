@@ -30,9 +30,9 @@ namespace Crtz.ProductContext.App.EPoint.Cmd
         {
             EndpointConfiguration endpointCfg = new EndpointConfiguration(endpointName);
 
-            EndpointConfig.ConfigureSerialization(endpointCfg);
-            EndpointConfig.ConfigureTransport(endpointCfg, ConfigurationManager.ConnectionStrings[ConnectionStringNames.AzureServiceBusTransport].ToString());
-            EndpointConfig.ConfigureLearningPersistence(endpointCfg);
+            endpointCfg.ConfigureSerialization();
+            endpointCfg.ConfigureTransport(ConfigurationManager.ConnectionStrings[ConnectionStringNames.AzureServiceBusTransport].ToString());
+            endpointCfg.ConfigureLearningPersistence();
 
             endpointInstance = await Endpoint.Start(endpointCfg).ConfigureAwait(false);
 

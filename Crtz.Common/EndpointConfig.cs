@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Crtz.Common
 {
-    public static class EndpointConfig
+    public static class EndpointConfigExtensions
     {
-        public static void ConfigureSerialization(EndpointConfiguration endpointCfg)
+        public static void ConfigureSerialization(this EndpointConfiguration endpointCfg)
         {
             endpointCfg.UseSerialization<NewtonsoftSerializer>();
         }
 
-        public static void ConfigureTransport(EndpointConfiguration endpointCfg, string connectionString)
+        public static void ConfigureTransport(this EndpointConfiguration endpointCfg, string connectionString)
         {
             endpointCfg.EnableInstallers();
 
@@ -22,12 +22,12 @@ namespace Crtz.Common
             //endpointCfg.UseTransport<LearningTransport>();
         }
 
-        public static void ConfigureLearningPersistence(EndpointConfiguration endpointCfg)
+        public static void ConfigureLearningPersistence(this EndpointConfiguration endpointCfg)
         {
             endpointCfg.UsePersistence<LearningPersistence>();
         }
 
-        public static void ConfigurePersistence(EndpointConfiguration endpointCfg)
+        public static void ConfigurePersistence(this EndpointConfiguration endpointCfg)
         {
             return;
         }

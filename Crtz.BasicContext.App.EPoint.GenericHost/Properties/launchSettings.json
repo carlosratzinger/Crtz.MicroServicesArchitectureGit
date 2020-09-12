@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Crtz.BasicContext.App.EPoint.GenericHost": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

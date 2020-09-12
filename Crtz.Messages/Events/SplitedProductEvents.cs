@@ -18,7 +18,7 @@ namespace Crtz.Messages.Events
 
         public override string ToString()
         {
-            return $"(Name:{this.Name})";
+            return $"(Name: {this.Name})";
         }
     }
 

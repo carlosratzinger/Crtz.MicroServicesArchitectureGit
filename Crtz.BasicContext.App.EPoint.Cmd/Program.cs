@@ -46,9 +46,9 @@ namespace Crtz.BasicContext.App.EPoint.Cmd
             {
                 EndpointConfiguration endpointCfg = new EndpointConfiguration(EndpointNames.BasicContext_EPoint);
 
-                EndpointConfig.ConfigureSerialization(endpointCfg);
-                EndpointConfig.ConfigureTransport(endpointCfg, configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
-                EndpointConfig.ConfigurePersistence(endpointCfg);
+                endpointCfg.ConfigureSerialization();
+                endpointCfg.ConfigureTransport(configuration.GetConnectionString(ConnectionStringNames.AzureServiceBusTransport));
+                endpointCfg.ConfigurePersistence();
 
                 return endpointCfg;
             });
